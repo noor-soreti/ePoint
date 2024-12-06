@@ -1,4 +1,3 @@
-import * as React from 'react';
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-charts/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
@@ -25,6 +24,7 @@ const xThemeComponents = {
   ...datePickersCustomizations,
   ...treeViewCustomizations,
 };
+import type {} from '@mui/material/themeCssVarsAugmentation';
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (
