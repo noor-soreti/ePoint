@@ -30,10 +30,6 @@ const Drawer = styled(MuiDrawer)({
 export default function SideMenu() {
   const [ userAttributes, setUserAttributes ] = React.useState([])
 
-  console.log(userAttributes[0]);
-  
-  
-
   useEffect(() => {
     const handleGetUserAttributes = async () => {
       const retrieveUserAttributes = await fetchUserAttributes()

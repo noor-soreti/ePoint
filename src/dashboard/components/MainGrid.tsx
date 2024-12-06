@@ -10,6 +10,10 @@ import HighlightedCard from './HighlightedCard';
 import PageViewsBarChart from './PageViewsBarChart';
 import SessionsChart from './SessionsChart';
 import StatCard, { StatCardProps } from './StatCard';
+import Button from '@mui/material/Button';
+import { useState } from 'react';
+import Modal from '@mui/material/Modal';
+import { List, TextField } from '@mui/material';
 
 const data: StatCardProps[] = [
   {
@@ -45,12 +49,32 @@ const data: StatCardProps[] = [
 ];
 
 export default function MainGrid() {
+  const [ openModal, setOpenModal ] = useState(false);
+  console.log(openModal);
+  
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
       {/* cards */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
       <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
         Overview
       </Typography>
+      <Button onClick={() => setOpenModal(prev=>!prev)} variant="contained">New Card</Button>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(prev=>!prev)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Get A New Rewards Card
+          </Typography>
+          <TextField id="standard-basic" label="Search Business Name" variant="standard" />
+          
+        </Box>
+      </Modal>
+      </Box>
       <Grid
         container
         spacing={2}
@@ -90,3 +114,16 @@ export default function MainGrid() {
     </Box>
   );
 }
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};

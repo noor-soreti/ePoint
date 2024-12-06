@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<App />} >
           <Route index element={<MainGrid/>} />
-          {/* <Route path="/rewardsCard:cardId" element={<Cards/>} /> */}
+          <Route path="/rewardsCard:cardId" element={<Cards/>} />
         </Route>
       </Routes>
       </BrowserRouter>

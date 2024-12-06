@@ -22,7 +22,7 @@ import AddCardIcon from '@mui/icons-material/AddCard'
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon /> },
   { text: 'Rewards Cards', icon: <CardMembershipIcon /> },
-  { text: 'New Card', icon: <AddCardIcon /> },
+  // { text: 'New Card', icon: <AddCardIcon /> },
   { text: 'Insights', icon: <AnalyticsIcon /> },
 ];
 
@@ -40,10 +40,10 @@ const secondaryListItems = [
 ];
 
 export default function MenuContent() {
-  const [ open, setOpen ] = React.useState(false)
+  const [ openDropDown, setOpenDropDown ] = React.useState(false);
 
-  const handleClick = () => {
-    setOpen(prev=>!prev)
+  const handleOpenDropDown = () => {
+    setOpenDropDown(prev=>!prev);
   }
 
   return (
@@ -55,15 +55,14 @@ export default function MenuContent() {
             {
               item.text == 'Rewards Cards' ?
               <>
-              <ListItemButton onClick={handleClick} selected={index === 0}>
+              <ListItemButton onClick={handleOpenDropDown} selected={index === 0}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
               {
-                open ? <ExpandLess/> : <ExpandMore/>
+                openDropDown ? <ExpandLess/> : <ExpandMore/>
               }
               </ListItemButton>
-              <Collapse in={open} timeout="auto" unmountOnExit>
-
+              <Collapse in={openDropDown} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {cardListItems.map((cardItem) => (
                     <ListItemButton sx={{ pl: 4 }}>
@@ -72,7 +71,6 @@ export default function MenuContent() {
                     </ListItemButton>
                   ))}
                 </List>
-
               </Collapse>
               </>
               :
