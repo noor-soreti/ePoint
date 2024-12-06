@@ -3,7 +3,6 @@ import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import Dashboard from "./dashboard/Dashboard";
-import MarketingPage from "./marketing-page/MarketingPage";
 
 const client = generateClient<Schema>();
 
