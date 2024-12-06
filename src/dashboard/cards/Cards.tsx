@@ -1,5 +1,7 @@
-export default function Cards() {
+export default function Cards({...props}) {
     return(
-        <div>HELLO CARD</div>
+        <div>
+            CARDS
+        </div>
     )
 }
