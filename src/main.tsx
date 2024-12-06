@@ -6,13 +6,23 @@ import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import { BrowserRouter, Routes, Route } from "react-router";
+import MainGrid from "./dashboard/components/MainGrid.tsx";
+import Cards from "./dashboard/cards/Cards.tsx";
 
 Amplify.configure(outputs);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Authenticator>
-      <App />
+    <Authenticator >
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} >
+          <Route index element={<MainGrid/>} />
+          {/* <Route path="/rewardsCard:cardId" element={<Cards/>} /> */}
+        </Route>
+      </Routes>
+      </BrowserRouter>
     </Authenticator>
   </React.StrictMode>
 );
