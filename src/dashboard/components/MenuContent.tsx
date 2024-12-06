@@ -17,7 +17,6 @@ import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CableIcon from '@mui/icons-material/Cable';
 import CoffeeIcon from '@mui/icons-material/Coffee';
-import AddCardIcon from '@mui/icons-material/AddCard'
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon /> },
