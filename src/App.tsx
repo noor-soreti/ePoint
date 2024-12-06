@@ -16,17 +16,17 @@ function App() {
     });
   }, []);
 
-  // function createTodo() {
-  //   client.models.Todo.create({ content: window.prompt("Todo content") });
-  // }
+  function createTodo() {
+    client.models.Todo.create({ content: window.prompt("Todo content") });
+  }
 
-  // function deleteTodo(id: string) {
-  //   client.models.Todo.delete({ id })
-  // }
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
 
   return (
     <main>
-      {/* <h1>My todos</h1>
+      <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
@@ -42,9 +42,8 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
-      <button onClick={signOut}>Sign out</button> */}
-      {/* <MarketingPage/> */}
-      {/* <Dashboard/> */}
+      <button onClick={signOut}>Sign out</button>
+
 
 
     </main>
