@@ -43,8 +43,6 @@ function App() {
         </a>
       </div>
       <button onClick={signOut}>Sign out</button> */}
-      <Button variant="contained">Hello world</Button>
-
 
     </main>
   );
