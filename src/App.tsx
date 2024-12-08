@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+// import type { Schema } from "../amplify/data/resource";
+// import { generateClient } from "aws-amplify/data";
 // import { useAuthenticator } from '@aws-amplify/ui-react';
 import { SideBar } from "./components/SideBar/SideBar";
 import { Outlet } from "react-router";
