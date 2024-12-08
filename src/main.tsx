@@ -21,10 +21,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} >
-            {/* <Route index element={<MainGrid/>} />
+            <Route index element={<MainGrid/>} />
             <Route path="cards/:pid" element={<Cards/>} />
             <Route path="analytics" element={<Analytics/>} />
-            <Route path="settings" element={<Settings/>} /> */}
+            <Route path="settings" element={<Settings/>} />
           </Route>
         </Routes>
         </BrowserRouter>
