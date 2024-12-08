@@ -3,7 +3,7 @@ import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { SideBar } from "./components/SideBar/SideBar";
-import { MainGrid } from "./components/MainGrid/MainGrid";
+import { Outlet } from "react-router";
 
 const client = generateClient<Schema>();
 
@@ -46,7 +46,7 @@ function App() {
       <button onClick={signOut}>Sign out</button> */}
 
       <SideBar/>
-      <MainGrid/>
+      <Outlet/>
 
     </main>
   );
