@@ -8,7 +8,7 @@ import { Outlet } from "react-router";
 const client = generateClient<Schema>();
 
 function App() {
-  // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   // const { signOut } = useAuthenticator();
 
   useEffect(() => {
