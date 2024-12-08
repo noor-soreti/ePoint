@@ -5,9 +5,9 @@ Creating a schema will create an AWS managed GraphQL service called
 AppSync in backend
 Each schema is tied to a separate DynamoDB table
 =================================================================*/
-const schema = a.schema({
+const schema = a.schema({ // define schema (a.schema())
   Todo: a
-    .model({
+    .model({ // define model (a.model())
       content: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
