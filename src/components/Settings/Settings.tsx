@@ -3,7 +3,9 @@
 
 export const Settings = () => {
     // const { signOut } = useAuthenticator()
+
     return(
-        <div>SETTINGS</div>
+        <div>
+        </div>
     )
 }
