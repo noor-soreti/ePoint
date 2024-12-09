@@ -30,9 +30,6 @@ import { Outlet } from 'react-router';
 
 const client = generateClient<Schema>();
 
-console.log(client);
-
-
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>

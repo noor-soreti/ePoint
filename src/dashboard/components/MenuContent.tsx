@@ -11,6 +11,11 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { Link } from 'react-router';
+import { useState } from 'react';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import StarBorder from '@mui/icons-material/StarBorder';
+import Collapse from '@mui/material/Collapse';
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon />, path: "/" },
@@ -24,12 +29,43 @@ const secondaryListItems = [
   { text: 'Feedback', icon: <HelpRoundedIcon />, path: 'feedback' },
 ];
 
+const cardListItems = [
+  {text: 'Book Nook', }
+]
+
 export default function MenuContent() {
+  const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false)
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
         {mainListItems.map((item, index) => (
-          <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+          <>
+            {
+            item.text == 'Cards' ?
+            <>
+              <ListItem key={index} disablePadding sx={{ display: 'block' }}>
+            {/* <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}> */}
+              <ListItemButton onClick={() => setOpenCardsDropdown(prev=>!prev)} selected={index === 0}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} >
+                  { openCardsDropdown ? <ExpandLess/> : <ExpandMore/> }
+                </ListItemText>
+              </ListItemButton>
+            {/* </Link> */}
+            </ListItem>
+            <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary="Starred" />
+                </ListItemButton>
+              </List>
+            </Collapse>
+            </>
+            :
+            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
             <Link to={item.path} style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton selected={index === 0}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
@@ -37,6 +73,8 @@ export default function MenuContent() {
               </ListItemButton>
             </Link>
           </ListItem>
+          }
+          </>
         ))}
       </List>
 

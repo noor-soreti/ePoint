@@ -10,7 +10,17 @@ const schema = a.schema({ // define schema (a.schema())
     .model({ // define model (a.model())
       content: a.string(),
     })
-    .authorization((allow) => [allow.owner()]),
+    .authorization(allow => [
+      // allow signed-in user to CRUD their __OWN__ schema model
+      allow.owner()
+    ]),
+    Business: a
+      .model({
+        businessName: a.string(),
+        type: a.enum(['coffee & restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness & wellness', 'books & stationary', 'jewelry & accessories', 'pharmacy & health']),
+        description: a.string(),
+        createdAt: a.datetime()
+      })
 });
 
 export type Schema = ClientSchema<typeof schema>;
