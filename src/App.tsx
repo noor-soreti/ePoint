@@ -2,8 +2,9 @@
 // import type { Schema } from "../amplify/data/resource";
 // import { generateClient } from "aws-amplify/data";
 // import { useAuthenticator } from '@aws-amplify/ui-react';
-import { SideBar } from "./components/SideBar/SideBar";
-import { Outlet } from "react-router";
+// import { SideBar } from "./components/SideBar/SideBar";
+// import { Outlet } from "react-router";
+import Dashboard from "./dashboard/Dashboard";
 
 // const client = generateClient<Schema>();
 
@@ -27,8 +28,9 @@ function App() {
 
   return (
     <main>
-      <SideBar/>
-      <Outlet/>
+      <Dashboard/>
+      {/* <SideBar/>
+      <Outlet/> */}
     </main>
   );
 }
