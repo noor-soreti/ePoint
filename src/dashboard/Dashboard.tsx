@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import AppNavbar from './components/AppNavbar';
 import Header from './components/Header';
-import MainGrid from './components/MainGrid';
 import SideMenu from './components/SideMenu';
 import AppTheme from '../shared-theme/AppTheme';
 import {
@@ -25,6 +24,7 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 import type {} from '@mui/material/themeCssVarsAugmentation';
+import { Outlet } from 'react-router';
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (
@@ -53,8 +53,9 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
               mt: { xs: 8, md: 0 },
             }}
           >
-            <Header />
-            <MainGrid />
+            <Header/>
+            
+            <Outlet/>
           </Stack>
         </Box>
       </Box>
