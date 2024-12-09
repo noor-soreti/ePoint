@@ -17,10 +17,14 @@ const schema = a.schema({ // define schema (a.schema())
     Business: a
       .model({
         businessName: a.string(),
-        // type: a.enum(['coffee & restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness & wellness', 'books & stationary', 'jewelry & accessories', 'pharmacy & health']),
+        type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
         description: a.string(),
         createdAt: a.datetime()
       })
+      .authorization(allow=> [
+        allow.publicApiKey().to(['read']),
+        allow.owner()
+      ])
 });
 
 export type Schema = ClientSchema<typeof schema>;
