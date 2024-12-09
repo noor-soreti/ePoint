@@ -41,7 +41,7 @@ cases: https://docs.amplify.aws/gen2/build-a-backend/data/connect-to-API/
 import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 
-const client = generateClient<Schema>() // use this Data client for CRUDL requests
+const client = generateClient<Schema>() // use this Data client for CRUD requests
 */
 
 /*== STEP 3 ===============================================================

@@ -46,7 +46,7 @@ export default function SessionsChart() {
     <Card variant="outlined" sx={{ width: '100%' }}>
       <CardContent>
         <Typography component="h2" variant="subtitle2" gutterBottom>
-          Sessions
+          Total Points Collected
         </Typography>
         <Stack sx={{ justifyContent: 'space-between' }}>
           <Stack
