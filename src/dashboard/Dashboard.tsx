@@ -1,5 +1,5 @@
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "../../amplify/data/resource";
+// import { generateClient } from "aws-amplify/data";
+// import type { Schema } from "../../amplify/data/resource";
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-charts/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
