@@ -28,7 +28,7 @@ const xThemeComponents = {
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { Outlet } from 'react-router';
 
-const client = generateClient<Schema>();
+// const client = generateClient<Schema>();
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (

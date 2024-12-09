@@ -29,9 +29,9 @@ const secondaryListItems = [
   { text: 'Feedback', icon: <HelpRoundedIcon />, path: 'feedback' },
 ];
 
-const cardListItems = [
-  {text: 'Book Nook', }
-]
+// const cardListItems = [
+//   {text: 'Book Nook', }
+// ]
 
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false)
