@@ -17,7 +17,7 @@ const schema = a.schema({ // define schema (a.schema())
     Business: a
       .model({
         businessName: a.string(),
-        type: a.enum(['coffee & restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness & wellness', 'books & stationary', 'jewelry & accessories', 'pharmacy & health']),
+        // type: a.enum(['coffee & restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness & wellness', 'books & stationary', 'jewelry & accessories', 'pharmacy & health']),
         description: a.string(),
         createdAt: a.datetime()
       })
