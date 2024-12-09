@@ -12,7 +12,7 @@ import Cards from "./dashboard/components/Cards.tsx";
 import Analytics from "./dashboard/components/Analytics.tsx";
 
 Amplify.configure(outputs);
-document.title = "TEST"
+document.title = "VERA"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Authenticator >

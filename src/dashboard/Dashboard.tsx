@@ -1,3 +1,5 @@
+import { generateClient } from "aws-amplify/data";
+import type { Schema } from "../../amplify/data/resource";
 import type {} from '@mui/x-date-pickers/themeAugmentation';
 import type {} from '@mui/x-charts/themeAugmentation';
 import type {} from '@mui/x-data-grid/themeAugmentation';
@@ -25,6 +27,11 @@ const xThemeComponents = {
 };
 import type {} from '@mui/material/themeCssVarsAugmentation';
 import { Outlet } from 'react-router';
+
+const client = generateClient<Schema>();
+
+console.log(client);
+
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (

@@ -11,8 +11,10 @@ import PageViewsBarChart from './PageViewsBarChart';
 import SessionsChart from './SessionsChart';
 import StatCard, { StatCardProps } from './StatCard';
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '@mui/material/Modal';
+import { Schema } from '../../../amplify/data/resource';
+import { generateClient } from 'aws-amplify/api';
 
 const data: StatCardProps[] = [
   {
@@ -47,8 +49,30 @@ const data: StatCardProps[] = [
   },
 ];
 
+const client = generateClient<Schema>();
+
 export default function MainGrid() {
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [ text , setText ] = useState("")
   const [ openModal, setOpenModal ] = useState(false);  
+
+
+  useEffect(() => {
+    client.models.Todo.observeQuery().subscribe({
+      next: (data: any) => setTodos([...data.items]),
+    });
+  }, []);
+
+  function createTodo() {
+    client.models.Todo.create({ content: text });
+    setText("")
+  }
+
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+  console.log(text)
+
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
       <Modal
@@ -61,7 +85,15 @@ export default function MainGrid() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Look for a Business
           </Typography>
-          <TextField sx={{width: '100%'}} placeholder='Search...' />
+          <Box sx={{display: 'flex', flexDirection: 'row'}}>
+            <TextField sx={{width: '100%'}} placeholder='Search...' value={text} onChange={(e) => setText(e.target.value)} />
+            <Button onClick={createTodo}>Search</Button>
+            <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>{todo.content}</li>
+        ))}
+      </ul>
+          </Box>
         </Box>
       </Modal>
       {/* cards */}
