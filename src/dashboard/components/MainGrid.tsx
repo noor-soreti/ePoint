@@ -68,9 +68,9 @@ export default function MainGrid() {
     setText("")
   }
 
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
+  // function deleteTodo(id: string) {
+  //   client.models.Todo.delete({ id })
+  // }
   console.log(text)
 
   return (
