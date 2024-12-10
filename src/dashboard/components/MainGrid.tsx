@@ -43,7 +43,8 @@ export default function MainGrid() {
 
   useEffect(() => {
     client.models.Business.observeQuery().subscribe({
-      next: (data) => setBusiness([...data.items]),
+      next: (data) => {        
+        setBusiness([...data.items])},
     });
   }, []);
 
