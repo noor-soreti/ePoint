@@ -29,7 +29,7 @@ const schema = a.schema({ // define schema (a.schema())
         // logo: image in s3 bucket
       })
       .authorization(allow=> [
-        allow.authenticated().to(['read']),
+        allow.authenticated().to(['read', 'list', 'get']),
         allow.owner()
       ]),
     Card: a
