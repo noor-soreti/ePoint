@@ -10,11 +10,13 @@ import Copyright from '../internals/components/Copyright';
 // import PageViewsBarChart from './PageViewsBarChart';
 import SessionsChart from './SessionsChart';
 import StatCard, { StatCardProps } from './StatCard';
-import { Button, TextField } from '@mui/material';
+import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Modal from '@mui/material/Modal';
 import { Schema } from '../../../amplify/data/resource';
 import { generateClient } from 'aws-amplify/api';
+// import { ArrowDropDownIcon } from '@mui/x-date-pickers';
+import AddIcon from '@mui/icons-material/Add';
 
 const data: StatCardProps[] = [
   {
@@ -42,46 +44,57 @@ const data: StatCardProps[] = [
 const client = generateClient<Schema>();
 
 export default function MainGrid() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [business, setBusiness] = useState<Array<Schema["Business"]["type"]>>([]);
   const [ text , setText ] = useState("")
   const [ openModal, setOpenModal ] = useState(false);  
 
   useEffect(() => {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data: any) => setTodos([...data.items]),
+    client.models.Business.observeQuery().subscribe({
+      next: (data) => setBusiness([...data.items]),
     });
   }, []);
 
-  function createTodo() {
-    client.models.Todo.create({ content: text });
+  const handleSearch = () => {
+    console.log('search');
+    
+  }
+
+  const createCard = () => {
+    console.log("new card created");
     setText("")
   }
 
-  console.log(todos)
+  console.log(business)
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-      <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
       <Modal
         open={openModal}
         onClose={() => setOpenModal(prev=>!prev)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+
         <Box sx={boxStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Look for a Business
           </Typography>
           <Box sx={{display: 'flex', flexDirection: 'row'}}>
             <TextField sx={{width: '100%'}} placeholder='Search...' value={text} onChange={(e) => setText(e.target.value)} />
-            <Button onClick={createTodo}>Search</Button>
-            <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
+            <Button onClick={handleSearch}>Search</Button>
           </Box>
+          <List sx={{ width: '100%', bgcolor: 'background.paper', padding: 0}}>
+              {business.map((b) => (
+                <ListItem key={b.id} sx={{width: '100%'}} >
+                  <ListItemButton onClick={createCard}>
+                  <ListItemText primary={b.businessName} />
+                    <ListItemIcon> <AddIcon/> </ListItemIcon>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+          </List>
         </Box>
+
       </Modal>
       {/* cards */}
       <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>

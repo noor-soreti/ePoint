@@ -6,9 +6,12 @@ AppSync in backend
 Each schema is tied to a separate DynamoDB table
 =================================================================*/
 const schema = a.schema({ // define schema (a.schema())
-  Todo: a
-    .model({ // define model (a.model())
-      content: a.string(),
+  // creating a user model to store additional attributes not provided by Cognito and to define relationships between user and entities
+  User: a 
+    .model({
+      cards: a.hasMany('Card', 'userId'),
+      createdAt: a.datetime(),
+      updatedAt: a.datetime(),
     })
     .authorization(allow => [
       // allow signed-in user to CRUD their __OWN__ schema model
@@ -19,10 +22,27 @@ const schema = a.schema({ // define schema (a.schema())
         businessName: a.string(),
         type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
         description: a.string(),
-        createdAt: a.datetime()
+        location: a.string(),
+        phoneNumber: a.string(),
+        createdAt: a.datetime(),
+        updatedAt: a.datetime().authorization(allow => [allow.owner()])
+        // logo: image in s3 bucket
       })
       .authorization(allow=> [
-        allow.publicApiKey().to(['read']),
+        allow.authenticated().to(['read']),
+        allow.owner()
+      ]),
+    Card: a
+      .model({
+        userId: a.id(),
+        user: a.belongsTo('User', 'userId'),
+        points: a.integer(),
+        tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
+        createdAt: a.datetime(),
+        updatedAt: a.datetime().authorization(allow => [allow.owner()])
+      })
+      .authorization(allow => [
+        allow.authenticated().to(['read']) ,
         allow.owner()
       ])
 });
