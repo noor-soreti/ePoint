@@ -1,4 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+// import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*=================================================================
 Creating a schema will create an AWS managed GraphQL service called
@@ -7,16 +8,18 @@ Each schema is tied to a separate DynamoDB table
 =================================================================*/
 const schema = a.schema({ // define schema (a.schema())
   // creating a user model to store additional attributes not provided by Cognito and to define relationships between user and entities
-  User: a 
+  UserProfile: a 
     .model({
+      name: a.string().required(),
+      profileOwner: a.string(),
       cards: a.hasMany('Card', 'userId'),
       createdAt: a.datetime(),
       updatedAt: a.datetime(),
     })
     .authorization(allow => [
-      // allow signed-in user to CRUD their __OWN__ schema model
       allow.owner()
-    ]),
+    ]
+  ),
     Business: a
       .model({
         businessName: a.string(),
@@ -25,7 +28,8 @@ const schema = a.schema({ // define schema (a.schema())
         location: a.string(),
         phoneNumber: a.string(),
         createdAt: a.datetime(),
-        updatedAt: a.datetime().authorization(allow => [allow.owner()])
+        updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+        rewardsCards: a.hasMany('Card', 'businessId')
         // logo: image in s3 bucket
       })
       .authorization(allow=> [
@@ -35,7 +39,9 @@ const schema = a.schema({ // define schema (a.schema())
     Card: a
       .model({
         userId: a.id(),
-        user: a.belongsTo('User', 'userId'),
+        businessId: a.id(),
+        user: a.belongsTo('UserProfile', 'userId'),
+        business: a.belongsTo('Business', 'businessId') ,
         points: a.integer(),
         tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
         createdAt: a.datetime(),
@@ -44,8 +50,13 @@ const schema = a.schema({ // define schema (a.schema())
       .authorization(allow => [
         allow.authenticated().to(['read']) ,
         allow.owner()
-      ])
-});
+      ]),
+    // createNewUser: a
+    //   .mutation()
+    //   .arguments({name: a.string()})
+    //   .returns(a.string())
+})
+// .authorization((allow) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 
