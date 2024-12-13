@@ -17,7 +17,7 @@ const schema = a.schema({ // define schema (a.schema())
       updatedAt: a.datetime(),
     })
     .authorization(allow => [
-      allow.owner()
+      allow.ownerDefinedIn('profileOwner')
     ]
   ),
     Business: a
