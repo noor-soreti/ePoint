@@ -31,7 +31,7 @@ export default function OptionsMenu() {
   };
 
   const handleSignOut = async () => {
-    await signOut
+    await signOut()
   };
 
   return (
