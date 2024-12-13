@@ -1,5 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-// import { postConfirmation } from "../auth/post-confirmation/resource";
+import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*=================================================================
 Creating a schema will create an AWS managed GraphQL service called
@@ -52,7 +52,7 @@ const schema = a.schema({ // define schema (a.schema())
         allow.owner()
       ]),
 })
-// .authorization((allow) => [allow.resource(postConfirmation)]);
+.authorization((allow) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 
