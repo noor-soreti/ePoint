@@ -11,7 +11,7 @@ import Cards from "./dashboard/components/Cards.tsx";
 import Analytics from "./dashboard/components/Analytics.tsx";
 
 Amplify.configure(outputs);
-document.title = "VERA"
+document.title = "ePoint"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Authenticator >
