@@ -1,6 +1,6 @@
-import { defineFunction } from "@aws-amplify/backend";
+// import { defineFunction } from "@aws-amplify/backend";
 
-export const createNewUser = defineFunction({
-    name: 'createNewUser',
-    entry: './handler.ts'
-})
+// export const createNewUser = defineFunction({
+//     name: 'createNewUser',
+//     entry: './handler.ts'
+// })
