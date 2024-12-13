@@ -46,14 +46,15 @@ export default function MainGrid() {
       next: (data) => {        
         setBusiness([...data.items])},
     });
-  }, []);
+  }, [business]);
 
   const handleSearch = () => {
     console.log('search');    
   }
 
-  const createCard = () => {
-    console.log("new card created");
+  const createCard = (name: string) => {
+    // create a new card
+    console.log(name);
     setText("")
   }
 
@@ -76,16 +77,21 @@ export default function MainGrid() {
             <TextField sx={{width: '100%'}} placeholder='Search...' value={text} onChange={(e) => setText(e.target.value)} />
             <Button onClick={handleSearch}>Search</Button>
           </Box>
-          <List sx={{ width: '100%', bgcolor: 'background.paper', padding: 0}}>
+          {
+            business.length == 0 
+            ? <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100px'}}>No Businesses To Display</div>
+            :
+            <List sx={{ width: '100%', bgcolor: 'background.paper', padding: 0}}>
               {business.map((b) => (
                 <ListItem key={b.id} sx={{width: '100%'}} >
-                  <ListItemButton onClick={createCard}>
+                  <ListItemButton onClick={() => createCard(b.id)}>
                   <ListItemText primary={b.businessName} />
                     <ListItemIcon> <AddIcon/> </ListItemIcon>
                   </ListItemButton>
                 </ListItem>
               ))}
           </List>
+          }
         </Box>
 
       </Modal>
@@ -144,4 +150,5 @@ const boxStyle = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+
 };
