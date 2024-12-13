@@ -46,14 +46,19 @@ export default function MainGrid() {
       next: (data) => {        
         setBusiness([...data.items])},
     });
-  }, [business]);
+  }, []);
 
   const handleSearch = () => {
     console.log('search');    
   }
 
   const createCard = (name: string) => {
-    // create a new card
+    /* 
+    1. check if current user has card associated w/ business
+      1.1. if user has card, show toast with message "Already have a points card with \business name\"
+    2. create new card
+    3. navigate to page displaying new card info
+    */
     console.log(name);
     setText("")
   }

@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import MainGrid from "./dashboard/components/MainGrid.tsx";
 import Cards from "./dashboard/components/Cards.tsx";
 import Analytics from "./dashboard/components/Analytics.tsx";
+import { Settings } from "./dashboard/components/Settings.tsx";
 
 Amplify.configure(outputs);
 document.title = "ePoint"
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route index element={<MainGrid/>}/>
           <Route path="/cards" element={<Cards/>}/>
           <Route path="/analytics" element={<Analytics/>}/>
+          <Route path="/settings" element={<Settings/>}/>
           </Route>
         </Routes>
         </BrowserRouter>

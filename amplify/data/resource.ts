@@ -51,10 +51,6 @@ const schema = a.schema({ // define schema (a.schema())
         allow.authenticated().to(['read']) ,
         allow.owner()
       ]),
-    // createNewUser: a
-    //   .mutation()
-    //   .arguments({name: a.string()})
-    //   .returns(a.string())
 })
 // .authorization((allow) => [allow.resource(postConfirmation)]);
 
