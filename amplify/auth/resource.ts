@@ -15,7 +15,7 @@ export const auth = defineAuth({
       required: true  
     }
   },
-  triggers: {
-    postConfirmation
-  }
+  // triggers: {
+  //   postConfirmation
+  // }
 });
