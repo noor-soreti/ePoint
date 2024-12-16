@@ -20,37 +20,37 @@ const schema = a.schema({ // define schema (a.schema())
       allow.ownerDefinedIn('profileOwner')
     ]
   ),
-    Business: a
-      .model({
-        businessName: a.string(),
-        type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
-        description: a.string(),
-        location: a.string(),
-        phoneNumber: a.string(),
-        createdAt: a.datetime(),
-        updatedAt: a.datetime().authorization(allow => [allow.owner()]),
-        rewardsCards: a.hasMany('Card', 'businessId')
-        // logo: image in s3 bucket
-      })
-      .authorization(allow=> [
-        allow.publicApiKey().to(['read']),
-        allow.owner()
-      ]),
-    Card: a
-      .model({
-        userId: a.id(),
-        businessId: a.id(),
-        user: a.belongsTo('UserProfile', 'userId'),
-        business: a.belongsTo('Business', 'businessId') ,
-        points: a.integer(),
-        tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
-        createdAt: a.datetime(),
-        updatedAt: a.datetime().authorization(allow => [allow.owner()])
-      })
-      .authorization(allow => [
-        allow.authenticated().to(['read']) ,
-        allow.owner()
-      ]),
+  Business: a
+    .model({
+      businessName: a.string(),
+      type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
+      description: a.string(),
+      location: a.string(),
+      phoneNumber: a.string(),
+      createdAt: a.datetime(),
+      updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+      rewardsCards: a.hasMany('Card', 'businessId')
+      // logo: image in s3 bucket
+    })
+    .authorization(allow=> [
+      allow.publicApiKey().to(['read']),
+      allow.owner()
+    ]),
+  Card: a
+    .model({
+      userId: a.id(),
+      businessId: a.id(),
+      user: a.belongsTo('UserProfile', 'userId'),
+      business: a.belongsTo('Business', 'businessId') ,
+      points: a.integer(),
+      tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
+      createdAt: a.datetime(),
+      updatedAt: a.datetime().authorization(allow => [allow.owner()])
+    })
+    .authorization(allow => [
+      allow.authenticated().to(['read']) ,
+      allow.owner()
+    ]),
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
 
