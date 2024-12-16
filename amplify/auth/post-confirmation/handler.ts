@@ -18,5 +18,6 @@ export const handler: PostConfirmationTriggerHandler = async (event) => {
       name: event.request.userAttributes.name,
       profileOwner: `${event.request.userAttributes.sub}::${event.userName}`,
   });
+  console.log(event.request.userAttributes.name);
   return event;
 };
