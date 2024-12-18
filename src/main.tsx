@@ -10,8 +10,20 @@ import MainGrid from "./dashboard/components/MainGrid.tsx";
 import Cards from "./dashboard/components/Cards.tsx";
 import Analytics from "./dashboard/components/Analytics.tsx";
 import { Settings } from "./dashboard/components/Settings.tsx";
+import { generateClient } from "aws-amplify/api";
+import { Schema } from "../amplify/data/resource.ts";
 
 Amplify.configure(outputs);
+
+const client = generateClient<Schema>();
+
+const {data, errors} = await client.queries.myFirstFunction({
+  name: "Amplifyyyyy"
+})
+
+console.log(data);
+
+
 document.title = "ePoint"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
