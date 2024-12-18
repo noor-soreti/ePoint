@@ -10,18 +10,8 @@ import MainGrid from "./dashboard/components/MainGrid.tsx";
 import Cards from "./dashboard/components/Cards.tsx";
 import Analytics from "./dashboard/components/Analytics.tsx";
 import { Settings } from "./dashboard/components/Settings.tsx";
-import { generateClient } from "aws-amplify/api";
-import { Schema } from "../amplify/data/resource.ts";
 
 Amplify.configure(outputs);
-
-const client = generateClient<Schema>();
-
-await client.queries.myFirstFunction({
-  name: "Amplifyyyyy"
-}).then((e =>  console.log(e.data)))
-
-// console.log(data);
 
 
 document.title = "ePoint"

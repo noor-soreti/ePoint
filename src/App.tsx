@@ -1,12 +1,22 @@
 // import { useEffect, useState } from "react";
-// import type { Schema } from "../amplify/data/resource";
-// import { generateClient } from "aws-amplify/data";
+import type { Schema } from "../amplify/data/resource";
+import { generateClient } from "aws-amplify/data";
 // import { useAuthenticator } from '@aws-amplify/ui-react';
 // import { SideBar } from "./components/SideBar/SideBar";
 // import { Outlet } from "react-router";
 import Dashboard from "./dashboard/Dashboard";
 
-// const client = generateClient<Schema>();
+const client = generateClient<Schema>();
+
+
+const { data } = await client.queries.myFirstFunction({
+  name: "Amplifyyyyy"
+})
+
+console.log(data);
+
+
+
 
 function App() {
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
