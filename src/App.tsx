@@ -5,20 +5,19 @@ import { generateClient } from "aws-amplify/data";
 // import { SideBar } from "./components/SideBar/SideBar";
 // import { Outlet } from "react-router";
 import Dashboard from "./dashboard/Dashboard";
+import { useEffect } from "react";
 
 const client = generateClient<Schema>();
 
-
-const { data } = await client.queries.myFirstFunction({
-  name: "Amplifyyyyy"
-})
-
-console.log(data);
-
-
-
-
 function App() {
+
+  useEffect(() => {
+    const { data } =  await client.queries.myFirstFunction({
+      name: "Amplifyyyyy"
+    })
+    
+    console.log(data);
+  },[])
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   // const { signOut } = useAuthenticator();
 
