@@ -12,11 +12,13 @@ const client = generateClient<Schema>();
 function App() {
 
   useEffect(() => {
-    const { data } =  await client.queries.myFirstFunction({
-      name: "Amplifyyyyy"
-    })
-    
-    console.log(data);
+    const test = async () => {
+      const { data } =  await client.queries.myFirstFunction({
+        name: "Amplifyyyyy"
+      })
+      console.log(data);
+    }
+    test()
   },[])
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   // const { signOut } = useAuthenticator();
