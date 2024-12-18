@@ -1,6 +1,6 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 import { myFirstFunction } from "../my-first-function/resource";
-// import { postConfirmation } from "../auth/post-confirmation/resource";
+import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*=================================================================
 Creating a schema will create an AWS managed GraphQL service called
@@ -61,7 +61,7 @@ const schema = a.schema({ // define schema (a.schema())
   .handler(a.handler.function(myFirstFunction))
   .authorization(allow => [allow.authenticated()]),
 })
-// .authorization((allow) => [allow.resource(postConfirmation)]);
+.authorization((allow) => [allow.resource(postConfirmation)]);
 
 export type Schema = ClientSchema<typeof schema>;
 

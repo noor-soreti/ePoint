@@ -17,7 +17,7 @@ Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
 
-const {data, errors} = await client.queries.myFirstFunction({
+const {data} = await client.queries.myFirstFunction({
   name: "Amplifyyyyy"
 })
 
