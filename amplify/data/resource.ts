@@ -52,14 +52,6 @@ const schema = a.schema({ // define schema (a.schema())
       allow.authenticated().to(['read']) ,
       allow.owner()
     ]),
-  // myFirstFunction: a
-  // .query()
-  // .arguments({
-  //   name: a.string(),
-  // })
-  // .returns(a.string())
-  // .handler(a.handler.function(myFirstFunction))
-  // .authorization(allow => [allow.authenticated()]),
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
 
@@ -68,7 +60,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: "userPool",
+    defaultAuthorizationMode: "apiKey",
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
       expiresInDays: 30,
