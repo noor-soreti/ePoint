@@ -1,5 +1,5 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-import { myFirstFunction } from "../my-first-function/resource";
+// import { myFirstFunction } from "../my-first-function/resource";
 import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*=================================================================
@@ -52,14 +52,14 @@ const schema = a.schema({ // define schema (a.schema())
       allow.authenticated().to(['read']) ,
       allow.owner()
     ]),
-  myFirstFunction: a
-  .query()
-  .arguments({
-    name: a.string(),
-  })
-  .returns(a.string())
-  .handler(a.handler.function(myFirstFunction))
-  .authorization(allow => [allow.authenticated()]),
+  // myFirstFunction: a
+  // .query()
+  // .arguments({
+  //   name: a.string(),
+  // })
+  // .returns(a.string())
+  // .handler(a.handler.function(myFirstFunction))
+  // .authorization(allow => [allow.authenticated()]),
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
 

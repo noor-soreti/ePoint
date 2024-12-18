@@ -1,25 +1,17 @@
 // import { useEffect, useState } from "react";
-import type { Schema } from "../amplify/data/resource";
-import { generateClient } from "aws-amplify/data";
+// import type { Schema } from "../amplify/data/resource";
+// import { generateClient } from "aws-amplify/data";
 // import { useAuthenticator } from '@aws-amplify/ui-react';
 // import { SideBar } from "./components/SideBar/SideBar";
 // import { Outlet } from "react-router";
 import Dashboard from "./dashboard/Dashboard";
-import { useEffect } from "react";
-
-const client = generateClient<Schema>();
 
 function App() {
-
-  useEffect(() => {
-    const test = async () => {
-      const { data } =  await client.queries.myFirstFunction({
-        name: "Amplifyyyyy"
-      })
-      console.log(data);
-    }
-    test()
-  },[])
+  return (
+    <main>
+      <Dashboard/>
+    </main>
+  );
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   // const { signOut } = useAuthenticator();
 
@@ -36,12 +28,6 @@ function App() {
   // function deleteTodo(id: string) {
   //   client.models.Todo.delete({ id })
   // }
-
-  return (
-    <main>
-      <Dashboard/>
-    </main>
-  );
 }
 
 export default App;

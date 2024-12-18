@@ -13,7 +13,6 @@ import { Settings } from "./dashboard/components/Settings.tsx";
 
 Amplify.configure(outputs);
 
-
 document.title = "ePoint"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
