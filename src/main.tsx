@@ -17,11 +17,11 @@ Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
 
-const {data} = await client.queries.myFirstFunction({
+await client.queries.myFirstFunction({
   name: "Amplifyyyyy"
-})
+}).then((e =>  console.log(e.data)))
 
-console.log(data);
+// console.log(data);
 
 
 document.title = "ePoint"
