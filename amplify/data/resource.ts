@@ -10,8 +10,10 @@ const schema = a.schema({ // define schema (a.schema())
   // creating a user model to store additional attributes not provided by Cognito and to define relationships between user and entities
   UserProfile: a 
     .model({
-      email: a.string(),
+      email: a.string().required(),
       profileOwner: a.string(),
+      createdAt: a.datetime(),
+      updatedAt: a.datetime(),
       cards: a.hasMany('Card', 'userId'),
     })
     .authorization(allow => [
