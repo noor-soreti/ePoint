@@ -1,5 +1,4 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
-// import { myFirstFunction } from "../my-first-function/resource";
 import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*=================================================================
@@ -13,9 +12,9 @@ const schema = a.schema({ // define schema (a.schema())
     .model({
       name: a.string().required(),
       profileOwner: a.string(),
-      cards: a.hasMany('Card', 'userId'),
       createdAt: a.datetime(),
       updatedAt: a.datetime(),
+      cards: a.hasMany('Card', 'userId'),
     })
     .authorization(allow => [
       allow.ownerDefinedIn('profileOwner')
@@ -39,14 +38,14 @@ const schema = a.schema({ // define schema (a.schema())
     ]),
   Card: a
     .model({
-      userId: a.id(),
-      businessId: a.id(),
-      user: a.belongsTo('UserProfile', 'userId'),
-      business: a.belongsTo('Business', 'businessId') ,
       points: a.integer(),
       tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
       createdAt: a.datetime(),
-      updatedAt: a.datetime().authorization(allow => [allow.owner()])
+      updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+      userId: a.id(),
+      businessId: a.id(),
+      user: a.belongsTo('UserProfile', 'userId'),
+      business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
       allow.authenticated().to(['read']) ,
