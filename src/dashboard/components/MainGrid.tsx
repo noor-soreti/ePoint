@@ -46,7 +46,7 @@ export default function MainGrid() {
       next: (data) => {        
         setBusiness([...data.items])},
     });
-  }, []);
+  }, [business]);
 
   const handleSearch = () => {
     console.log('search');    
@@ -63,7 +63,7 @@ export default function MainGrid() {
     setText("")
   }
 
-  console.log(business)
+  // console.log(business)
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>

@@ -11,11 +11,13 @@ import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { Link } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Collapse from '@mui/material/Collapse';
+import { generateClient } from 'aws-amplify/api';
+import { Schema } from '../../../amplify/data/resource';
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon />, path: "/" },
@@ -33,8 +35,22 @@ const secondaryListItems = [
 //   {text: 'Book Nook', }
 // ]
 
+const client = generateClient<Schema>();
+
 export default function MenuContent() {
-  const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false)
+  const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
+  const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
+
+  useEffect(() => {
+    client.models.Card.observeQuery().subscribe({
+      next: (data) => {        
+        setCards([...data.items])
+      }
+    })
+  },[cards])
+
+  console.log(cards?.length);
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       <List dense>
@@ -55,12 +71,14 @@ export default function MenuContent() {
             </ListItem>
             <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                {cards?.map((item, index) => (
+                  <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText primary="Starred" />
                 </ListItemButton>
+                ))}
               </List>
             </Collapse>
             </>
