@@ -70,7 +70,7 @@ export default function MenuContent() {
             </ListItem>
             <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                 {cards?.map((item) => (
+                 {cards?.map((item, index) => (
                   <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <CardGiftcardIcon />
