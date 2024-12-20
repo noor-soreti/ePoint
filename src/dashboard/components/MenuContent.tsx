@@ -42,11 +42,12 @@ export default function MenuContent() {
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
 
   useEffect(() => {
-    client.models.Card.observeQuery().subscribe({
+    const cardsService = client.models.Card.observeQuery().subscribe({
       next: (data) => {        
         setCards([...data.items])
       }
     })
+    return () => cardsService.unsubscribe()
   },[cards])
 
   console.log(cards?.length);
@@ -71,14 +72,14 @@ export default function MenuContent() {
             </ListItem>
             <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {cards?.map((item, index) => (
+                {/* {cards?.map((item, index) => ( */}
                   <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <StarBorder />
                   </ListItemIcon>
                   <ListItemText primary="Starred" />
                 </ListItemButton>
-                ))}
+                {/* ))} */}
               </List>
             </Collapse>
             </>

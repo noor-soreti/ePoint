@@ -42,10 +42,11 @@ export default function MainGrid() {
   const [ openModal, setOpenModal ] = useState(false);  
 
   useEffect(() => {
-    client.models.Business.observeQuery().subscribe({
+    const businessService = client.models.Business.observeQuery().subscribe({
       next: (data) => {        
         setBusiness([...data.items])},
     });
+    return () => businessService.unsubscribe()
   }, [business]);
 
   const handleSearch = () => {
