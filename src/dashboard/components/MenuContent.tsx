@@ -39,7 +39,7 @@ const client = generateClient<Schema>();
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
-  // const business = client.models.Business
+  const business = client.models.Business
 
   useEffect(() => {
     const cardsService = client.models.Card.observeQuery().subscribe({
