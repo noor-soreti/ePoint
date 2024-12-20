@@ -10,7 +10,7 @@ import ListItemIcon, { listItemIconClasses } from '@mui/material/ListItemIcon';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
-import { signOut } from 'aws-amplify/auth';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 
 const MenuItem = styled(MuiMenuItem)({
@@ -21,6 +21,7 @@ export default function OptionsMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const { signOut } = useAuthenticator((context) => [context.user])
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -28,10 +29,6 @@ export default function OptionsMenu() {
 
   const handleClose = async () => {
     setAnchorEl(null);
-  };
-
-  const handleSignOut = async () => {
-    await signOut()
   };
 
   return (
@@ -78,7 +75,7 @@ export default function OptionsMenu() {
             },
           }}
         >
-          <ListItemText onClick={handleSignOut}>Logout</ListItemText>
+          <ListItemText onClick={signOut}>Logout</ListItemText>
           <ListItemIcon>
             <LogoutRoundedIcon fontSize="small" />
           </ListItemIcon>

@@ -14,7 +14,6 @@ import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
 import Collapse from '@mui/material/Collapse';
 import { generateClient } from 'aws-amplify/api';
 import { Schema } from '../../../amplify/data/resource';
@@ -40,6 +39,7 @@ const client = generateClient<Schema>();
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
+  const business = client.models.Business
 
   useEffect(() => {
     const cardsService = client.models.Card.observeQuery().subscribe({
@@ -49,8 +49,6 @@ export default function MenuContent() {
     })
     return () => cardsService.unsubscribe()
   },[cards])
-
-  console.log(cards?.length);
 
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
@@ -72,14 +70,14 @@ export default function MenuContent() {
             </ListItem>
             <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {/* {cards?.map((item, index) => ( */}
+                 {cards?.map((item, index) => (
                   <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
-                    <StarBorder />
+                    <CardGiftcardIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Starred" />
+                  <ListItemText primary={item.businessId} />
                 </ListItemButton>
-                {/* ))} */}
+                 ))} 
               </List>
             </Collapse>
             </>
