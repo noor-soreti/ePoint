@@ -39,7 +39,7 @@ const client = generateClient<Schema>();
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
-  const business = client.models.Business
+  // const business = client.models.Business
 
   useEffect(() => {
     const cardsService = client.models.Card.observeQuery().subscribe({
@@ -70,7 +70,7 @@ export default function MenuContent() {
             </ListItem>
             <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                 {cards?.map((item, index) => (
+                 {cards?.map((item) => (
                   <ListItemButton sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <CardGiftcardIcon />
