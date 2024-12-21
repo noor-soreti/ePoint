@@ -30,10 +30,6 @@ const secondaryListItems = [
   { text: 'Feedback', icon: <HelpRoundedIcon />, path: 'feedback' },
 ];
 
-// const cardListItems = [
-//   {text: 'Book Nook', }
-// ]
-
 const client = generateClient<Schema>();
 
 export default function MenuContent() {
@@ -47,11 +43,14 @@ export default function MenuContent() {
         setCards([...data.items])
       }
     })
+
     return () => cardsService.unsubscribe()
   },[cards])
 
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
+      
       <List dense>
         {mainListItems.map((item, index) => (
           <>

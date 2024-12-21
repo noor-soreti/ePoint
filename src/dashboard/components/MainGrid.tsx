@@ -60,7 +60,7 @@ export default function MainGrid() {
     2. create new card
     3. navigate to page displaying new card info
     */
-    console.log(name);
+    // console.log(name);
     setText("")
   }
 
