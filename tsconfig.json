@@ -20,6 +20,6 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/shared-theme", "**/*.ts"],
+  "include": ["src", "src/shared-theme", "interface.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
