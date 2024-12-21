@@ -16,19 +16,20 @@ Amplify.configure(outputs);
 document.title = "ePoint"
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Authenticator >
-      <ThemeProvider>
-        <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} >
-          <Route index element={<MainGrid/>}/>
-          <Route path="/cards" element={<Cards/>}/>
-          <Route path="/analytics" element={<Analytics/>}/>
-          <Route path="/settings" element={<Settings/>}/>
-          </Route>
-        </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </Authenticator>
+
+      <Authenticator >
+        <ThemeProvider>
+          <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} >
+            <Route index element={<MainGrid/>}/>
+            <Route path="/cards" element={<Cards/>}/>
+            <Route path="/analytics" element={<Analytics/>}/>
+            <Route path="/settings" element={<Settings/>}/>
+            </Route>
+          </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </Authenticator>
   </React.StrictMode>
 );

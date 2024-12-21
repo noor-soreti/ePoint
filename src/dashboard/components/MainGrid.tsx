@@ -50,7 +50,7 @@ export default function MainGrid() {
   }, [business]);
 
   const handleSearch = () => {
-    console.log('search');    
+    console.log('search');
   }
 
   const createCard = (name: string) => {
@@ -61,7 +61,7 @@ export default function MainGrid() {
     3. navigate to page displaying new card info
     */
     // console.log(name);
-    setText("")
+    setText("");
   }
 
   // console.log(business)
