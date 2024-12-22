@@ -39,14 +39,13 @@ export default function MenuContent() {
 
   useEffect(() => {
     const cardsService = client.models.Card.observeQuery().subscribe({
-      next: (data) => {        
+      next: (data) => {       
+        console.log(data);
         setCards([...data.items])
       }
     })
-
     return () => cardsService.unsubscribe()
-  },[cards])
-
+  },[cards])  
 
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>

@@ -27,8 +27,8 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu() {
-  const [ currentUser, setCurrentUser ] = useState()
-  const [ userEmail, setUserEmail ] = useState()
+  const [ currentUser, setCurrentUser ] = useState<any>()
+  const [ userEmail, setUserEmail ] = useState<any>()
   
   useEffect(() => {
     const handleCurrentUser = async () => {
