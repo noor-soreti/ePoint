@@ -73,7 +73,7 @@ export default function MenuContent() {
                   <ListItemIcon>
                     <CardGiftcardIcon />
                   </ListItemIcon>
-                  <ListItemText primary={item.businessId} />
+                  <ListItemText primary={item.userId} />
                 </ListItemButton>
                  ))} 
               </List>
