@@ -41,14 +41,14 @@ const schema = a.schema({ // define schema (a.schema())
       points: a.integer(),
       tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
       createdAt: a.datetime(),
-      updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+      updatedAt: a.datetime(),
       userId: a.id(),
       businessId: a.id(),
       user: a.belongsTo('UserProfile', 'userId'),
       business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
-      allow.authenticated().to(['read']) ,
+      // allow.authenticated().to(['read']),
       allow.owner()
     ]),
 })
