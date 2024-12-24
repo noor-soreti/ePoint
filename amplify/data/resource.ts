@@ -49,7 +49,7 @@ const schema = a.schema({ // define schema (a.schema())
     })
     .authorization(allow => [
       // allow.authenticated().to(['read']),
-      allow.ownerDefinedIn('userId')
+      allow.owner()
     ]),
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
