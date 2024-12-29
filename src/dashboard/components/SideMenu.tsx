@@ -29,6 +29,8 @@ const Drawer = styled(MuiDrawer)({
 export default function SideMenu() {
   const [ currentUser, setCurrentUser ] = useState<any>()
   const [ userEmail, setUserEmail ] = useState<any>()
+  const [ test, setTest ] = useState<any>()
+  
   
   useEffect(() => {
     const handleCurrentUser = async () => {
@@ -36,9 +38,10 @@ export default function SideMenu() {
       setCurrentUser(preferred_username)
       setUserEmail(email)
     }
+
     return () => { handleCurrentUser()}
   }, [])
-  
+
   return (
     <Drawer
       variant="permanent"

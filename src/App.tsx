@@ -1,17 +1,42 @@
-// import { useEffect, useState } from "react";
-// import type { Schema } from "../amplify/data/resource";
-// import { generateClient } from "aws-amplify/data";
-// import { useAuthenticator } from '@aws-amplify/ui-react';
-// import { SideBar } from "./components/SideBar/SideBar";
-// import { Outlet } from "react-router";
+import Analytics from "./dashboard/components/Analytics";
+import Cards from "./dashboard/components/Cards";
+import MainGrid from "./dashboard/components/MainGrid";
+import { Settings } from "./dashboard/components/Settings";
 import Dashboard from "./dashboard/Dashboard";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import SignIn from "./sign-in/SignIn";
+import SignUp from "./sign-up/SignUp";
+import ConfirmUserPage from "./confirmUserPage";
+import { Test } from "./test";
 
 function App() {
+
+  const isAuthenticated = () => {
+    const accessToken = sessionStorage.getItem("accessToken");
+    return !!accessToken;
+  };
   
   return (
-    <main>
-      <Dashboard/>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          isAuthenticated() ? (
+            <Navigate replace to="/home" />
+          ) : (
+            <Navigate replace to="/login" />
+          )
+        }/>
+        <Route path="/login" element={<SignIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/confirm" element={<ConfirmUserPage/>} />
+        <Route path="/home" element={
+          isAuthenticated() ? <Test/> : <Navigate replace to="/login" />
+        }/>
+        <Route path="/cards" element={<Cards/>}/>
+        <Route path="/analytics" element={<Analytics/>}/>
+        <Route path="/settings" element={<Settings/>}/>
+      </Routes>
+    </BrowserRouter>
   );
   // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
   // const { signOut } = useAuthenticator();

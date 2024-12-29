@@ -44,6 +44,11 @@ export default function MenuContent() {
         setCards([...data.items])
       }
     })
+
+    const user = client.models.UserProfile.list()
+    console.log(user);
+    
+
     return () => cardsService.unsubscribe()
   },[cards])  
 
