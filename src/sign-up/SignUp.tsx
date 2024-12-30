@@ -114,8 +114,9 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
     try {
       event.preventDefault()
       const email = data.get("email") as string
+      const fullName = data.get("name") as string
       const password = data.get("password") as string
-      await signUp(email, password);
+      await signUp(email, fullName, password);
       navigate("/confirm", { state: { email } });
     } catch (error) {
       alert(`Sign up failed: ${error}`);

@@ -46,7 +46,7 @@ import {
     }
   };
   
-  export const signUp = async (email: string, password: string) => {
+  export const signUp = async (email: string, preferredName: string , password: string) => {
     const params: SignUpCommandInput = {
       ClientId: config.clientId,
       Username: email,
@@ -56,6 +56,10 @@ import {
           Name: "email",
           Value: email,
         },
+        {
+          Name: "preferred_username",
+          Value: preferredName
+        }
       ],
     };
     try {

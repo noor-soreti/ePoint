@@ -102,7 +102,7 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
 
     } catch (error) {
       event.preventDefault()
-      alert(`Sign in failed`)
+      alert(`Sign in failed: ${error}`)
     }
 
     console.log({
