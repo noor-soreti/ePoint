@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import SignIn from "./sign-in/SignIn";
 import SignUp from "./sign-up/SignUp";
 import ConfirmUserPage from "./confirmUserPage";
-import { Test } from "./test";
 
 function App() {
 
@@ -30,7 +29,7 @@ function App() {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/confirm" element={<ConfirmUserPage/>} />
         <Route path="/home" element={
-          isAuthenticated() ? <Test/> : <Navigate replace to="/login" />
+          isAuthenticated() ? <Dashboard/> : <Navigate replace to="/login" />
         }/>
         <Route path="/cards" element={<Cards/>}/>
         <Route path="/analytics" element={<Analytics/>}/>
