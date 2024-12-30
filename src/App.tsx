@@ -1,12 +1,12 @@
 import Analytics from "./dashboard/components/Analytics";
 import Cards from "./dashboard/components/Cards";
-import MainGrid from "./dashboard/components/MainGrid";
 import { Settings } from "./dashboard/components/Settings";
 import Dashboard from "./dashboard/Dashboard";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import SignIn from "./sign-in/SignIn";
 import SignUp from "./sign-up/SignUp";
 import ConfirmUserPage from "./confirmUserPage";
+import MainGrid from "./dashboard/components/MainGrid";
 
 function App() {
 
@@ -37,22 +37,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-  // const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-  // const { signOut } = useAuthenticator();
-
-  // useEffect(() => {
-  //   client.models.Todo.observeQuery().subscribe({
-  //     next: (data) => setTodos([...data.items]),
-  //   });
-  // }, []);
-
-  // function createTodo() {
-  //   client.models.Todo.create({ content: window.prompt("Todo content") });
-  // }
-
-  // function deleteTodo(id: string) {
-  //   client.models.Todo.delete({ id })
-  // }
 }
 
 export default App;

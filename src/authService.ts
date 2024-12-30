@@ -6,6 +6,7 @@ import {
     InitiateAuthCommand,
     SignUpCommand,
     ConfirmSignUpCommand,
+    RevokeTokenCommand,
     type InitiateAuthCommandInput,
     type SignUpCommandInput,
     type ConfirmSignUpCommandInput,
@@ -89,3 +90,7 @@ import {
       throw error;
     }
   };
+
+  export const signOut = async () => {
+    console.log('SIGN OUT')
+  }

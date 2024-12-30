@@ -27,6 +27,7 @@ import type {} from '@mui/material/themeCssVarsAugmentation';
 import { Outlet } from 'react-router';
 
 export default function Dashboard(props: { disableCustomTheme?: boolean }) {
+  console.log(sessionStorage.getItem("refreshToken"))
     return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />

@@ -92,24 +92,18 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
       if (session && typeof session.AccessToken !== "undefined") {
         sessionStorage.setItem("accessToken", session.AccessToken);
         if (sessionStorage.getItem("accessToken")) {
-          window.location.href = "/home";
+          // window.location.href = "/home";
+          navigate("/home")
         } else {
           console.error("Session token was not set properly.");
         }
       } else {
         console.error("SignIn session or AccessToken is undefined.");
       }
-
     } catch (error) {
       event.preventDefault()
       alert(`Sign in failed: ${error}`)
-    }
-
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    
+    }    
   };
 
   const validateInputs = () => {
