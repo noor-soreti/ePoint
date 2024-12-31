@@ -38,6 +38,7 @@ const schema = a.schema({ // define schema (a.schema())
     ]),
   Card: a
     .model({
+      title: a.string(),
       points: a.integer(),
       tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
       createdAt: a.datetime(),
