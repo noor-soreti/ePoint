@@ -10,7 +10,6 @@ import Modal from '@mui/material/Modal';
 import { Schema } from '../../../amplify/data/resource';
 import { generateClient } from 'aws-amplify/api';
 import AddIcon from '@mui/icons-material/Add';
-import { getCurrentUser } from 'aws-amplify/auth';
 
 const data: StatCardProps[] = [
   {
@@ -65,21 +64,10 @@ export default function MainGrid() {
     setText("");
   }
 
-  const getU = async () => {
-    const { userId } = await getCurrentUser();
-
-    // const { data: userProfile } = await client.models.UserProfile.get({id: userId});
-
-    // const { data: cards } = await userProfile?.cards();
-    
-    // console.log(cards)
-  }
-
   // console.log(business)
 
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
-      <Button onClick={getU} >click</Button>
       <Modal
         open={openModal}
         onClose={() => setOpenModal(prev=>!prev)}
