@@ -10,6 +10,7 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import StoreIcon from '@mui/icons-material/Store';
 import { Link } from 'react-router';
 import { useState, useEffect } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -21,6 +22,7 @@ import { Schema } from '../../../amplify/data/resource';
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon />, path: "/" },
   { text: 'Cards', icon: <CardGiftcardIcon />, path: "cards"  },
+  { text: 'Business', icon: <StoreIcon />, path: "business"  },
   { text: 'Analytics', icon: <AnalyticsRoundedIcon />, path: "analytics"  },
 ];
 
