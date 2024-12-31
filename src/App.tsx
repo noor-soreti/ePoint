@@ -31,9 +31,10 @@ function App() {
         <Route path="/home" element={
           isAuthenticated() ? <Dashboard/> : <Navigate replace to="/login" />
         }/>
-        <Route path="/cards" element={<Cards/>}/>
-        <Route path="/analytics" element={<Analytics/>}/>
-        <Route path="/settings" element={<Settings/>}/>
+        <Route index element={<MainGrid/>} />
+        <Route path="/home/cards" element={<Cards/>}/>
+        <Route path="/home/analytics" element={<Analytics/>}/>
+        <Route path="/home/settings" element={<Settings/>}/>
       </Routes>
     </BrowserRouter>
   );
