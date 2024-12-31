@@ -12,11 +12,11 @@ The app’s static web content including HTML, CSS, JavaScript, and images is ho
 
 ## User Management
 
-I used leveraged Cognito for custom authentication and authorization for user management to secure the app’s backend API. I created a user pool to manage the app’s user accounts. Users must provide an email address and password to register. On submission, Cognito will send a confirmation email with a verification code to the email address. After confirming their account, a new user record is created in DynamoDB and users are able to sign in. Once a user is signed in, the browser receives a set of JSON Web Tokens (JWT) issued by Cognito to authenticate users and grant access to resources
+I used leveraged Cognito for custom authentication and authorization for user management to secure the app’s backend API. I created a user pool to manage the app’s user accounts. Users must provide an email address and password to register. On submission, Cognito will send a confirmation email with a verification code to the email address. After confirming their account, a new user record is created in DynamoDB and users are able to sign in. Once a user is signed in, the browser receives a set of JSON Web Tokens (JWT) issued by Cognito to authenticate users and grant access to resources among other things
 
-Access Token:
-ID Token:
-Refresh Token:
+- Access Token: Contains information about the authenticated user. This token's purpose is to authorize API operations
+- ID Token: Contains claims about the identity of the authenticated user. The ID token can be used inside applications to provide information such as user `name`, `email` and `phone number` among other things.
+- Refresh Token: This token is used to retrieve new ID and access tokens
 
 ## Serverless Backend
 
