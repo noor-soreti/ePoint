@@ -14,7 +14,7 @@ const schema = a.schema({ // define schema (a.schema())
       profileOwner: a.string(),
       createdAt: a.datetime(),
       updatedAt: a.datetime(),
-      cards: a.hasMany('Card', 'userId'),
+      cards: a.hasMany('Card', 'userProfileId'),
     })
     .authorization(allow => [
       allow.ownerDefinedIn('profileOwner')
@@ -42,14 +42,14 @@ const schema = a.schema({ // define schema (a.schema())
       tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
       createdAt: a.datetime(),
       updatedAt: a.datetime(),
-      userId: a.id(),
+      userProfileId: a.id(),
       // businessId: a.id(),
-      user: a.belongsTo('UserProfile', 'userId'),
+      user: a.belongsTo('UserProfile', 'userProfileId'),
       // business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
       // allow.authenticated().to(['read']),
-      allow.ownerDefinedIn('userId')
+      allow.ownerDefinedIn('userProfileId')
     ]),
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
