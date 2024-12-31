@@ -1,27 +1,35 @@
-## AWS Amplify React+Vite Starter Template
+## Serverless Web App
 
-[Link](https://main.dt8jvus4iw7ds.amplifyapp.com)
+ePoint is a simple serverless web app that enables users to collect and redeem points from retail businesses in order to encourage customer loyalty. I built this app to practice designing and implementing cloud computing solutions. The app presents users with an HTML-based user interface with Amplify. The app interacts with a RESTful web service on the backend with API Gateway, AppSync, Lambda, and DynamoDB to submit the request and process user transactions. Users must register with the service and log in before requesting rides; Cognito is used for authentication.
 
-This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+## App Architecture
 
-## Overview
+[architecture image](public/wildrydes-architecture.png)
 
-This template equips you with a foundational React application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+# Static Web Hosting
 
-## Features
+The app’s static web content including HTML, CSS, JavaScript, and images is hosted by Amplify. Amplify exposes the public URL and loads the static web content in the user’s browser. I connected my source code from my Git repo to Amplify to enable continuous deployment!
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+# User Management
 
-## Deploying to AWS
+I used leveraged Cognito for custom authentication and authorization for user management to secure the app’s backend API. I created a user pool to manage the app’s user accounts. Users must provide an email address and password to register. On submission, Cognito will send a confirmation email with a verification code to the email address. After confirming their account, a new user record is created in DynamoDB and users are able to sign in. Once a user is signed in, the browser receives a set of JSON Web Tokens (JWT) issued by Cognito to authenticate users and grant access to resources
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/react/start/quickstart/#deploy-a-fullstack-app-to-aws) of our documentation.
+Access Token:
+ID Token:
+Refresh Token:
 
-## Security
+# Serverless Backend
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+A serverless architecture is a way to build and run applications and services without having to manage infrastructure. Server management is abstracted by AWS so that developers can focus on the core product. I used Lambda and DynamoDB, a key-value store, to build the backend process for handling requests. Lambda runs code in response to an event trigger; triggers are often another AWS service such as API Gateway. When a user makes requests a request, a Lambda function is triggered to handle the event such as collecting points after a transaction or redeeming points. Also, the function records the request in a DynamoDB table then responds to the app with details about the transaction. 
 
-## License
+```
+code snippet
+```
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+# RESTful API
+
+Finally, I used API Gateway to expose my Lambda function as a RESTful API secured using the Cognito user pool. The browser sends and receives data over API Gateway. Authenticated users make a request by selecting their either to collect or redeem points at checkout.
+
+```
+code snippet
+```

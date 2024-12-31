@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import SignIn from "./sign-in/SignIn";
 import SignUp from "./sign-up/SignUp";
 import ConfirmUserPage from "./confirmUserPage";
+import MainGrid from "./dashboard/components/MainGrid";
 
 function App() {
 
@@ -30,9 +31,10 @@ function App() {
         <Route path="/home" element={
           isAuthenticated() ? <Dashboard/> : <Navigate replace to="/login" />
         }/>
-        <Route path="/cards" element={<Cards/>}/>
-        <Route path="/analytics" element={<Analytics/>}/>
-        <Route path="/settings" element={<Settings/>}/>
+        <Route index element={<MainGrid/>} />
+        <Route path="/home/cards" element={<Cards/>}/>
+        <Route path="/home/analytics" element={<Analytics/>}/>
+        <Route path="/home/settings" element={<Settings/>}/>
       </Routes>
     </BrowserRouter>
   );
