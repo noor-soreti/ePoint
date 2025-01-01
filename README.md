@@ -4,7 +4,7 @@ ePoint is a simple serverless web app that enables users to collect and redeem p
 
 # App Architecture
 
-![architecture image](public/wildrydes-architecture.png)
+![architecture image](public/epoint-architecture.png)
 
 ## Dynamic Web Hosting
 
