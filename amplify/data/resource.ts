@@ -29,7 +29,7 @@ const schema = a.schema({ // define schema (a.schema())
       phoneNumber: a.string(),
       createdAt: a.datetime(),
       updatedAt: a.datetime().authorization(allow => [allow.owner()]),
-      // rewardsCards: a.hasMany('Card', 'businessId')
+      rewardsCards: a.hasMany('Card', 'businessId')
       // logo: image in s3 bucket
     })
     .authorization(allow=> [
@@ -38,14 +38,15 @@ const schema = a.schema({ // define schema (a.schema())
     ]),
   Card: a
     .model({
+      title: a.string(),
       points: a.integer(),
       tier: a.enum(['bronze', 'silver', 'gold', 'diamond', 'emerald']),
       createdAt: a.datetime(),
       updatedAt: a.datetime(),
       userId: a.id(),
-      // businessId: a.id(),
+      businessId: a.id(),
       user: a.belongsTo('UserProfile', 'userId'),
-      // business: a.belongsTo('Business', 'businessId')
+      business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
       // allow.authenticated().to(['read']),

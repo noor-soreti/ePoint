@@ -7,6 +7,12 @@ import SignIn from "./sign-in/SignIn";
 import SignUp from "./sign-up/SignUp";
 import ConfirmUserPage from "./confirmUserPage";
 import MainGrid from "./dashboard/components/MainGrid";
+import { Amplify } from "aws-amplify";
+import outputs from "../amplify_outputs.json";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { Business } from "./dashboard/components/Business";
+
+Amplify.configure(outputs);
 
 function App() {
 
@@ -16,7 +22,26 @@ function App() {
   };
   
   return (
-    <BrowserRouter>
+    <Authenticator>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard/>} >
+            <Route index element={<MainGrid/>} />
+            <Route path="cards" element={<Cards/>}/>
+            <Route path="analytics" element={<Analytics/>}/>
+            <Route path="business" element={<Business/>}/>
+            <Route path="settings" element={<Settings/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Authenticator>
+  );
+}
+
+export default App;
+
+/*
+<BrowserRouter>
       <Routes>
         <Route path="/" element={
           isAuthenticated() ? (
@@ -31,14 +56,11 @@ function App() {
         <Route path="/home" element={
           isAuthenticated() ? <Dashboard/> : <Navigate replace to="/login" />
         }>
-        <Route index element={<MainGrid/>} />
-        <Route path="cards" element={<Cards/>}/>
-        <Route path="analytics" element={<Analytics/>}/>
-        <Route path="settings" element={<Settings/>}/>
+          <Route index element={<MainGrid/>} />
+          <Route path="cards" element={<Cards/>}/>
+          <Route path="analytics" element={<Analytics/>}/>
+          <Route path="settings" element={<Settings/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
-  );
-}
-
-export default App;
+*/
