@@ -42,7 +42,7 @@ const schema = a.schema({ // define schema (a.schema())
       name: a.string(),
       price: a.float(),
       description: a.string(),
-      businessId: a.string(), // Reference to the associated Business model
+      businessId: a.string().required(), // Reference to the associated Business model
       createdAt: a.datetime(),
       updatedAt: a.datetime().authorization(allow => [allow.owner()]),
       business: a.belongsTo("Business", "businessId")
