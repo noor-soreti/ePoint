@@ -40,7 +40,7 @@ const schema = a.schema({ // define schema (a.schema())
   SalesItem: a
     .model({
       name: a.string().required(),
-      price: a.float(),
+      price: a.float().required(),
       description: a.string(),
       businessId: a.string().required(), // Reference to the associated Business model
       createdAt: a.datetime(),
