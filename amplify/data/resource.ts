@@ -22,7 +22,7 @@ const schema = a.schema({ // define schema (a.schema())
   ),
   Business: a
     .model({
-      businessName: a.string(),
+      businessName: a.string().required(),
       type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
       description: a.string(),
       location: a.string(),
@@ -39,11 +39,12 @@ const schema = a.schema({ // define schema (a.schema())
     ]),
   SalesItem: a
     .model({
-      name: a.string(),
-      price: a.float(),
+      name: a.string().required(),
+      price: a.float().required(),
       description: a.string(),
       businessId: a.string().required(), // Reference to the associated Business model
       createdAt: a.datetime(),
+      type: a.enum(['beverage', 'food', 'clothing', 'stationary']),
       updatedAt: a.datetime().authorization(allow => [allow.owner()]),
       business: a.belongsTo("Business", "businessId")
     })
