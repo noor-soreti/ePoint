@@ -29,13 +29,24 @@ const schema = a.schema({ // define schema (a.schema())
       phoneNumber: a.string(),
       createdAt: a.datetime(),
       updatedAt: a.datetime().authorization(allow => [allow.owner()]),
-      rewardsCards: a.hasMany('Card', 'businessId')
+      rewardsCards: a.hasMany('Card', 'businessId'),
+      salesItems: a.hasMany('SalesItem', 'businessId')
       // logo: image in s3 bucket
     })
     .authorization(allow=> [
       allow.authenticated().to(['read']),
       allow.owner()
     ]),
+  SalesItem: a
+    .model({
+      name: a.string(),
+      price: a.float(),
+      description: a.string(),
+      businessId: a.string(), // Reference to the associated Business model
+      createdAt: a.datetime(),
+      updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+      business: a.belongsTo("Business", "businessId")
+    }),
   Card: a
     .model({
       title: a.string(),

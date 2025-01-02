@@ -42,15 +42,13 @@ export default function MenuContent() {
   useEffect(() => {
     const cardsService = client.models.Card.observeQuery().subscribe({
       next: (data) => {       
-        console.log(data);
+        // console.log(data);
         setCards([...data.items])
       }
     })
 
     const user = client.models.UserProfile.list()
-    console.log(user);
-    
-
+    // console.log(user);
     return () => cardsService.unsubscribe()
   },[cards])  
 
