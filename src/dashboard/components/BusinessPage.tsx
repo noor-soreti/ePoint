@@ -24,8 +24,10 @@ export const BusinessPage = () => {
         });
 
         const getBusinessName = async () => {
-            const bName = await client.models.Business.get({id: businessId})
-            setBusinessName(bName.data?.businessName);
+            if (typeof businessId == "string") {
+                const bName = await client.models.Business.get({id: businessId})
+                setBusinessName(bName.data?.businessName);
+            }
         }
         getBusinessName()
         return () => salesItemService.unsubscribe()
