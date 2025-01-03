@@ -12,12 +12,13 @@ import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import StoreIcon from '@mui/icons-material/Store';
 import { Link } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { generateClient } from 'aws-amplify/api';
 import { Schema } from '../../../amplify/data/resource';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 const mainListItems = [
   { text: 'Home', icon: <HomeRoundedIcon />, path: "/" },
@@ -37,21 +38,53 @@ const client = generateClient<Schema>();
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
-  const business = client.models.Business
+  const [ userProfile, setUserProfile ] = useState<Schema["UserProfile"]["type"]>();
 
-  useEffect(() => {
-    const cardsService = client.models.Card.observeQuery().subscribe({
-      next: (data) => {       
-        // console.log(data);
-        setCards([...data.items])
+  const handleGetUserSession = async () => {
+    const userAttributes = await fetchUserAttributes();
+    try {
+      const response = await client.models.UserProfile.list({
+        filter: { email: { eq: userAttributes.email } }
+      });
+      // console.log("Response:", response);
+      if (response.data) {
+        // console.log("Profiles:", [...response.data]);
+        setUserProfile([...response.data][0])        
+      } else {
+        // console.warn("No profiles found.");
       }
-    })
+    } catch (error) {
+      console.error("Error fetching profiles:", error);
+    }
+  };
 
-    const user = client.models.UserProfile.list()
-    // console.log(user);
-    return () => cardsService.unsubscribe()
-  },[cards])  
+  const handleGetCardSession = async () => {
+    try {
+      const response = await client.models.Card.list({
+        filter: {
+          userId: {eq: "b11cb898-65a2-4963-8962-2679b9eb69a8"}
+        }
+      })
+      console.log([...response.data]);
+      
+    } catch (error) {
+      console.error("Error fetching profiles:", error);
+    }
+  }
+  
+  useEffect(() => {
+    handleGetUserSession()
+    handleGetCardSession()
 
+    // const cardsService = client.models.Card.observeQuery().subscribe({
+      //   next: (data) => {       
+        //     // console.log(data);
+        //     setCards([...data.items])
+        //   }
+        // })
+        // return () => cardsService.unsubscribe()
+  },[])  
+      
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
       
@@ -71,7 +104,9 @@ export default function MenuContent() {
               </ListItemButton>
             {/* </Link> */}
             </ListItem>
-            <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
+
+
+            {/* <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                  {cards?.map((item, index) => (
                   <ListItemButton key={item.id} sx={{ pl: 4 }}>
@@ -82,7 +117,9 @@ export default function MenuContent() {
                 </ListItemButton>
                  ))} 
               </List>
-            </Collapse>
+            </Collapse> */}
+
+
             </>
             :
             <ListItem key={index} disablePadding sx={{ display: 'block' }}>

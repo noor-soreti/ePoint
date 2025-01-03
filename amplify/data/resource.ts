@@ -64,7 +64,7 @@ const schema = a.schema({ // define schema (a.schema())
       business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
-      // allow.authenticated().to(['read']),
+      allow.authenticated().to(['read']),
       allow.ownerDefinedIn('userId')
     ]),
 })
