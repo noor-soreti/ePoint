@@ -1,5 +1,8 @@
 import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
 import { postConfirmation } from "../auth/post-confirmation/resource";
+// import { sayHello } from "../functions/say-hello/resource";
+// import { purchaseItem } from "../functions/purchase-item/resource";
+import { handler } from "../auth/post-confirmation/handler";
 
 /*=================================================================
 Creating a schema will create an AWS managed GraphQL service called
@@ -67,6 +70,26 @@ const schema = a.schema({ // define schema (a.schema())
       allow.authenticated().to(['read']),
       allow.ownerDefinedIn('userId')
     ]),
+    // sayHello: a
+    //   .query()
+    //   .arguments({
+    //     name: a.string()
+    //   })
+    //   .returns(a.string())
+    //   .handler(a.handler.function(sayHello))
+    //   .authorization((allow) => allow.authenticated()),
+    // purchaseItem: a
+    //   .query()
+    //   .arguments({
+    //     businessId: a.string(),
+    //     description: a.string(),
+    //     itemId: a.string(),
+    //     name: a.string(),
+    //     price: a.float(),
+    //   })
+    //   .returns(a.string())
+    //   .handler(a.handler.function(purchaseItem))
+    //   .authorization((allow) => allow.authenticated())
 })
 .authorization((allow) => [allow.resource(postConfirmation)]);
 

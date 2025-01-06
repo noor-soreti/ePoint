@@ -5,6 +5,7 @@ import { useParams } from "react-router"
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Modal, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
+import { fetchUserAttributes } from 'aws-amplify/auth';
 
 const client = generateClient<Schema>();
 
@@ -12,10 +13,11 @@ export const BusinessPage = () => {
     const { businessId } = useParams()
     // const [ saleItems, setSaleItems ] = useState<Array<Schema["SalesItem"]["type"]>>([]);
     const [ saleItems, setSaleItems ] = useState<Array<IPurchaseItem>>([]);
-    const [ businessName, setBusinessName ] = useState<string | undefined>("")
+    const [ businessInfo, setBusinessInfo ] = useState<Schema["Business"]["type"] | null>();
     const [ openPurchaseModal, setOpenPurchaseModal ] = useState(false);  
     const [ openRedeemModal, setOpenRedeemModal ] = useState(false);  
     const [ selectedItem, setSelectedItem ] = useState<IPurchaseItem | null>(null)
+    const [card, setCard] = useState<Array<Schema["Card"]["type"]>>([]);
     
     useEffect(() => {
         const salesItemService = client.models.SalesItem.observeQuery({
@@ -31,7 +33,7 @@ export const BusinessPage = () => {
                     name: item.name,
                     price: item.price ?? 0, // Default value in case price is undefined
                   }));
-                  console.log(items)
+                  console.log("Business Item List:", items)
                 // console.log([...data.items])             
                 setSaleItems(items)
             }
@@ -39,10 +41,23 @@ export const BusinessPage = () => {
 
         const getBusinessName = async () => {
             if (typeof businessId == "string") {
-                const bName = await client.models.Business.get({id: businessId})
-                setBusinessName(bName.data?.businessName);
+                const business = await (await client.models.Business.get({id: businessId})).data
+                setBusinessInfo(business);                
             }
         }
+
+        const getCardInfo = async () => {
+            const { email } = await fetchUserAttributes()
+            const getUser = await client.models.UserProfile.list({
+                filter: {
+                    email: {eq: email }
+                }
+            })
+            // const tt = (await [...getUser.data][0].cards()).data.filter((e) => e.businessId ==  )
+            
+        }
+        
+        getCardInfo()
         getBusinessName()
         return () => salesItemService.unsubscribe()
     }, [])
@@ -72,6 +87,18 @@ export const BusinessPage = () => {
         setOpenRedeemModal(prev=>!prev)
     }
 
+    const handlePurchase = async () => {
+        // const purchasedItem = await client.queries.purchaseItem({
+        //     businessId: selectedItem?.businessId,
+        //     description: selectedItem?.description,
+        //     itemId: selectedItem?.id,
+        //     price: selectedItem?.price,
+        //     name: selectedItem?.name
+        // })
+        // console.log(purchasedItem);
+        console.log(selectedItem);
+        
+    }
 
     return (
         <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
@@ -103,7 +130,7 @@ export const BusinessPage = () => {
                     Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
                     </Typography> */}
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 2 }}>
-                    <Button variant="contained" color="success">
+                    <Button onClick={handlePurchase} variant="contained" color="success">
                         Purchase
                     </Button>
                     </Box>
@@ -148,10 +175,10 @@ export const BusinessPage = () => {
 
             <Box>
                 <Typography component="h2" variant="h3" sx={{ mb: 2 }}>
-                    {businessName}
+                    {businessInfo?.businessName}
                 </Typography>
                 <Typography>
-                    Your {businessName} points: 20
+                    Your {businessInfo?.businessName} points: 20
                 </Typography>
             </Box>
             <List>
