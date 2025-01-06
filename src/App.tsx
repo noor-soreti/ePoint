@@ -11,6 +11,7 @@ import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Business } from "./dashboard/components/Business";
+import { BusinessPage } from "./dashboard/components/BusinessPage";
 
 Amplify.configure(outputs);
 
@@ -27,9 +28,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard/>} >
             <Route index element={<MainGrid/>} />
-            <Route path="cards" element={<Cards/>}/>
+            <Route path="cards/:cardId" element={<Cards/>}/>
             <Route path="analytics" element={<Analytics/>}/>
             <Route path="business" element={<Business/>}/>
+            <Route path="business/:businessId" element={<BusinessPage/>}/>
             <Route path="settings" element={<Settings/>}/>
           </Route>
         </Routes>

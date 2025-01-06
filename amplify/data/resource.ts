@@ -22,20 +22,35 @@ const schema = a.schema({ // define schema (a.schema())
   ),
   Business: a
     .model({
-      businessName: a.string(),
+      businessName: a.string().required(),
       type: a.enum(['coffee_restaurant', 'clothing', 'grocery', 'health', 'beauty', 'electronics', 'fitness_wellness', 'books_stationary', 'jewelry_accessories', 'pharmacy_health']),
       description: a.string(),
       location: a.string(),
       phoneNumber: a.string(),
       createdAt: a.datetime(),
       updatedAt: a.datetime().authorization(allow => [allow.owner()]),
-      rewardsCards: a.hasMany('Card', 'businessId')
+      rewardsCards: a.hasMany('Card', 'businessId'),
+      salesItems: a.hasMany('SalesItem', 'businessId')
       // logo: image in s3 bucket
     })
     .authorization(allow=> [
       allow.authenticated().to(['read']),
       allow.owner()
     ]),
+  SalesItem: a
+    .model({
+      name: a.string().required(),
+      price: a.float().required(),
+      description: a.string(),
+      businessId: a.string().required(), // Reference to the associated Business model
+      createdAt: a.datetime(),
+      type: a.enum(['beverage', 'food', 'clothing', 'stationary']),
+      updatedAt: a.datetime().authorization(allow => [allow.owner()]),
+      business: a.belongsTo("Business", "businessId")
+    })
+      .authorization(allow => [
+        allow.authenticated()
+      ]),
   Card: a
     .model({
       title: a.string(),
@@ -49,7 +64,7 @@ const schema = a.schema({ // define schema (a.schema())
       business: a.belongsTo('Business', 'businessId')
     })
     .authorization(allow => [
-      // allow.authenticated().to(['read']),
+      allow.authenticated().to(['read']),
       allow.ownerDefinedIn('userId')
     ]),
 })
