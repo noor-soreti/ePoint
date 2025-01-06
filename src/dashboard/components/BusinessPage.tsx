@@ -10,7 +10,8 @@ const client = generateClient<Schema>();
 
 export const BusinessPage = () => {
     const { businessId } = useParams()
-    const [ saleItems, setSaleItems ] = useState<Array<Schema["SalesItem"]["type"]>>([]);
+    // const [ saleItems, setSaleItems ] = useState<Array<Schema["SalesItem"]["type"]>>([]);
+    const [ saleItems, setSaleItems ] = useState<Array<IPurchaseItem>>([]);
     const [ businessName, setBusinessName ] = useState<string | undefined>("")
     const [ openPurchaseModal, setOpenPurchaseModal ] = useState(false);  
     const [ openRedeemModal, setOpenRedeemModal ] = useState(false);  
@@ -22,8 +23,17 @@ export const BusinessPage = () => {
                 businessId: {eq: businessId}
             }
         }).subscribe({
-            next: (data) => {                
-                setSaleItems([...data.items])
+            next: (data) => {   
+                const items = data.items.map((item: any) => ({
+                    businessId: item.businessId,
+                    description: item.description ?? '', // Provide default values if necessary
+                    id: item.id,
+                    name: item.name,
+                    price: item.price ?? 0, // Default value in case price is undefined
+                  }));
+                  console.log(items)
+                // console.log([...data.items])             
+                setSaleItems(items)
             }
         });
 
@@ -78,7 +88,12 @@ export const BusinessPage = () => {
                             {selectedItem?.name}
                         </Typography>
                         <Typography>
-                            ${parseFloat(selectedItem?.price).toFixed(2)}
+                            {
+                                selectedItem?.price != null && 
+                                <>
+                                ${parseFloat(selectedItem?.price.toString()).toFixed(2)}
+                                </>
+                            }
                         </Typography>
                         <Typography>
                             Collect X points
