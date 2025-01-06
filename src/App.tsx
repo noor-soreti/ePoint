@@ -28,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard/>} >
             <Route index element={<MainGrid/>} />
-            <Route path="cards" element={<Cards/>}/>
+            <Route path="cards/:cardId" element={<Cards/>}/>
             <Route path="analytics" element={<Analytics/>}/>
             <Route path="business" element={<Business/>}/>
             <Route path="business/:businessId" element={<BusinessPage/>}/>

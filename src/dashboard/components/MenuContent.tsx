@@ -38,7 +38,12 @@ const client = generateClient<Schema>();
 export default function MenuContent() {
   const [ openCardsDropdown, setOpenCardsDropdown ] = useState(false);
   const [ cards, setCards ] = useState<Array<Schema["Card"]["type"]>>();
-  const [ userProfile, setUserProfile ] = useState<Schema["UserProfile"]["type"]>();
+  const [ userProfile, setUserProfile ] = useState<Schema["UserProfile"]["type"]>();  
+
+  useEffect(() => {
+    handleGetUserSession()
+    handleGetCardSession()
+  },[])  
 
   const handleGetUserSession = async () => {
     const userAttributes = await fetchUserAttributes();
@@ -62,28 +67,15 @@ export default function MenuContent() {
     try {
       const response = await client.models.Card.list({
         filter: {
-          userId: {eq: "b11cb898-65a2-4963-8962-2679b9eb69a8"}
+          userId: {eq: userProfile?.id}
         }
       })
-      console.log([...response.data]);
+      setCards([...response.data]);
       
     } catch (error) {
       console.error("Error fetching profiles:", error);
     }
   }
-  
-  useEffect(() => {
-    handleGetUserSession()
-    handleGetCardSession()
-
-    // const cardsService = client.models.Card.observeQuery().subscribe({
-      //   next: (data) => {       
-        //     // console.log(data);
-        //     setCards([...data.items])
-        //   }
-        // })
-        // return () => cardsService.unsubscribe()
-  },[])  
       
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: 'space-between' }}>
@@ -106,18 +98,18 @@ export default function MenuContent() {
             </ListItem>
 
 
-            {/* <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
+            <Collapse in={openCardsDropdown} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                  {cards?.map((item, index) => (
-                  <ListItemButton key={item.id} sx={{ pl: 4 }}>
+                  <ListItemButton href={`/cards/${item.id}`} key={item.id} sx={{ pl: 2 }}>
                   <ListItemIcon>
                     <CardGiftcardIcon />
                   </ListItemIcon>
-                  <ListItemText primary={item.userId} />
+                  <ListItemText primary={item.title} />
                 </ListItemButton>
                  ))} 
               </List>
-            </Collapse> */}
+            </Collapse>
 
 
             </>
