@@ -108,7 +108,13 @@ export const BusinessPage = () => {
                             {selectedItem?.name}
                         </Typography>
                         <Typography>
-                            ${parseFloat(selectedItem?.price).toFixed(2)}
+                            {
+                                selectedItem?.price != null && 
+                                <>
+                                ${parseFloat(selectedItem?.price.toString()).toFixed(2)}
+                                </>
+                            }
+                            
                         </Typography>
                         <Typography>
                             Redeem X points
