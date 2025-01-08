@@ -1,6 +1,6 @@
 # Serverless Web App
 
-ePoint is a simple serverless web app that enables users to collect and redeem points from retail businesses in order to encourage customer loyalty. I built this app to practice designing and implementing cloud computing solutions. The app presents users with an HTML-based user interface with Amplify. The app interacts with a RESTful web service on the backend with API Gateway, AppSync, Lambda, and DynamoDB to submit the request and process user transactions. Users must register with the service and log in before requesting rides; Cognito is used for authentication.
+ePoint is a simple serverless web app that enables users to collect and redeem points from retail businesses in order to encourage customer loyalty. I built this app to practice designing and implementing cloud computing solutions. The app presents users with an React-based user interface with Amplify. The app interacts with a RESTful web service on the backend with API Gateway, AppSync, Lambda, and DynamoDB to submit the request and process user transactions. Users must register with the service and log in before requesting rides; Cognito is used for authentication.
 
 # App Architecture
 
@@ -8,7 +8,7 @@ ePoint is a simple serverless web app that enables users to collect and redeem p
 
 ## Dynamic Web Hosting
 
-The app’s dynamic web content including HTML, CSS, JavaScript, and images is hosted by Amplify. Amplify exposes the public URL and loads the dynamic web content in the user’s browser. I connected my source code from my Git repo to Amplify to enable continuous deployment!
+The app’s dynamic web content including React and images is hosted by Amplify. Amplify exposes the public URL and loads the dynamic web content in the user’s browser. I connected my source code from my Git repo to Amplify to enable continuous deployment!
 
 ## User Management
 
