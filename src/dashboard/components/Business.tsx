@@ -6,7 +6,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const client = generateClient<Schema>();
 
-export const Business = () => {
+export const Business = () => {  
     const [business, setBusiness] = useState<Array<Schema["Business"]["type"]>>([]);
 
     useEffect(() => {

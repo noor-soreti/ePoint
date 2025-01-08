@@ -21,7 +21,7 @@ I used leveraged Cognito for custom authentication and authorization for user ma
 ## Serverless Backend
 
 A serverless architecture is a way to build and run applications and services without having to manage infrastructure. Server management is abstracted by AWS so that developers can focus on the core product. I used Lambda and DynamoDB, a key-value store, to build the backend process for handling requests. Lambda runs code in response to an event trigger; triggers are often another AWS service such as API Gateway. When a user makes requests a request, a Lambda function is triggered to handle the event such as collecting points after a transaction or redeeming points. Also, the function records the request in a DynamoDB table then responds to the app with details about the transaction. 
-
+<!-- 
 ```
 code snippet
 ```
@@ -32,4 +32,4 @@ Finally, I used API Gateway to expose my Lambda function as a RESTful API secure
 
 ```
 code snippet
-```
+``` -->
