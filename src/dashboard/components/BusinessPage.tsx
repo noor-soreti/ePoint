@@ -53,8 +53,7 @@ export const BusinessPage = () => {
                     email: {eq: email }
                 }
             })
-            // const tt = (await [...getUser.data][0].cards()).data.filter((e) => e.businessId ==  )
-            
+            // const tt = (await [...getUser.data][0].cards()).data.filter((e) => e.businessId ==  )   
         }
         
         getCardInfo()
