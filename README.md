@@ -1,6 +1,6 @@
 # Serverless Web App
 
-ePoint is a simple serverless web app that enables users to collect and redeem points from retail businesses in order to encourage customer loyalty. I built this app to practice designing and implementing cloud computing solutions. The app presents users with an React-based user interface with Amplify. The app interacts with a RESTful web service on the backend with API Gateway, AppSync, Lambda, and DynamoDB to submit the request and process user transactions. Users must register with the service and log in before requesting rides; Cognito is used for authentication.
+ePoint is a simple serverless web app that enables users to collect and redeem points from retail businesses in order to encourage customer loyalty. I built this app to practice designing and implementing cloud computing solutions. The app presents users with an React-based user interface with Amplify. The app interacts with a GraphQL web service on the backend with AppSync, Lambda, and DynamoDB to submit requests and process user transactions. Users must register with the service and log in before requesting rides; Cognito is used for authentication.
 
 # App Architecture
 
@@ -12,7 +12,7 @@ The app’s dynamic web content including React and images is hosted by Amplify.
 
 ## User Management
 
-I used leveraged Cognito for custom authentication and authorization for user management to secure the app’s backend API. I created a user pool to manage the app’s user accounts. Users must provide an email address and password to register. On submission, Cognito will send a confirmation email with a verification code to the email address. After confirming their account, a new user record is created in DynamoDB and users are able to sign in. Once a user is signed in, the browser receives a set of JSON Web Tokens (JWT) issued by Cognito to authenticate users and grant access to resources among other things
+I leveraged Cognito for custom authentication and authorization for user management to secure the app’s backend API. I created a user pool to manage the app’s user accounts. Users must provide an email address and password to register. On submission, Cognito will send a confirmation email with a verification code to the email address. After confirming their account, a new user record is created in DynamoDB and users are able to sign in. Once a user is signed in, the browser receives a set of JSON Web Tokens (JWT) issued by Cognito to authenticate users and grant access to resources among other things
 
 - Access Token: Contains information about the authenticated user. This token's purpose is to authorize API operations
 - ID Token: Contains claims about the identity of the authenticated user. The ID token can be used inside applications to provide information such as user `name`, `email` and `phone number` among other things.
